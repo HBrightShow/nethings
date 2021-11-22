@@ -1,0 +1,1 @@
+/usr/bin/c++   -DSTATICLIB  -rdynamic CMakeFiles/Nethings.dir/main.cpp.o CMakeFiles/Nethings.dir/nethings.cpp.o  -o Nethings   -L/home/hml/xiaozhong/code/nethings/build/release-install-cpp11/lib  -Wl,-rpath,/home/hml/xiaozhong/code/nethings/build/release-install-cpp11/lib -Wl,-Bstatic -lmuduo_net -lmuduo_base -lmuduo_curl -Wl,-Bdynamic -lpthread 
