@@ -6,5 +6,5 @@ CXX_FLAGS =  -DSTATICLIB
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hml/xiaozhong/code/nethings/nethings/../build/release-install-cpp11/include 
+CXX_INCLUDES = -I/home/hml/xiaozhong/code/nethings/nethings/./build/release-install-cpp11/include 
 

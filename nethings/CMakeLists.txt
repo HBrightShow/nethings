@@ -48,10 +48,11 @@ set(CXX_FLAGS
 aux_source_directory(. DIR_SRCS)
 
 #添加第三方头文件
-include_directories(../build/release-install-cpp11/include)
+include_directories(./build/release-install-cpp11/include)
 
 #添加需要链接的库文件目录,参数是全路径
-link_directories(/home/hml/xiaozhong/code/nethings/build/release-install-cpp11/lib  /usr/lib)
+#link_directories(/home/hml/xiaozhong/code/nethings/build/release-install-cpp11/lib  /usr/lib)
+link_directories(~/xiaozhong/code/nethings/nethings/build/release-install-cpp11/lib  /usr/lib)
 
 
 # 指定生成目标
