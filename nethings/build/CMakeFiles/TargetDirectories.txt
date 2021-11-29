@@ -1,3 +1,0 @@
-/home/hml/xiaozhong/code/nethings/nethings/build/CMakeFiles/rebuild_cache.dir
-/home/hml/xiaozhong/code/nethings/nethings/build/CMakeFiles/edit_cache.dir
-/home/hml/xiaozhong/code/nethings/nethings/build/CMakeFiles/Nethings.dir
