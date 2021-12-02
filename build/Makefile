@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Nethings
+# Target rules for targets named nethings
 
 # Build rule for target.
-Nethings: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Nethings
-.PHONY : Nethings
+nethings: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nethings
+.PHONY : nethings
 
 # fast build rule for target.
-Nethings/fast:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/build
-.PHONY : Nethings/fast
+nethings/fast:
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/build
+.PHONY : nethings/fast
+
+#=============================================================================
+# Target rules for targets named system
+
+# Build rule for target.
+system: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 system
+.PHONY : system
+
+# fast build rule for target.
+system/fast:
+	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/build
+.PHONY : system/fast
 
 main.o: main.cpp.o
 
@@ -129,7 +142,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +151,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +160,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 nethings.o: nethings.cpp.o
@@ -156,7 +169,7 @@ nethings.o: nethings.cpp.o
 
 # target to build an object file
 nethings.cpp.o:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/nethings.cpp.o
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/nethings.cpp.o
 .PHONY : nethings.cpp.o
 
 nethings.i: nethings.cpp.i
@@ -165,7 +178,7 @@ nethings.i: nethings.cpp.i
 
 # target to preprocess a source file
 nethings.cpp.i:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/nethings.cpp.i
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/nethings.cpp.i
 .PHONY : nethings.cpp.i
 
 nethings.s: nethings.cpp.s
@@ -174,7 +187,7 @@ nethings.s: nethings.cpp.s
 
 # target to generate assembly for a file
 nethings.cpp.s:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/nethings.cpp.s
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/nethings.cpp.s
 .PHONY : nethings.cpp.s
 
 # Help Target
@@ -185,7 +198,8 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Nethings"
+	@echo "... nethings"
+	@echo "... system"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -79,12 +79,7 @@ class T
 
   const char* str_;
   const unsigned len_;
-};
-
-inline LogStream& operator<<(LogStream& s, T v)
-{
-  s.append(v.str_, v.len_);
-  return s;
+};Error
 }
 
 inline LogStream& operator<<(LogStream& s, const Logger::SourceFile& v)

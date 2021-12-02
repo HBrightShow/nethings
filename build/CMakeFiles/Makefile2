@@ -53,46 +53,93 @@ CMAKE_BINARY_DIR = /home/hml/xiaozhong/code/nethings/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/Nethings.dir/all
+all: CMakeFiles/nethings.dir/all
+all: system/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: system/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/Nethings.dir/clean
+clean: CMakeFiles/nethings.dir/clean
+clean: system/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Nethings.dir
+# Directory level rules for directory system
+
+# Recursive "all" directory target.
+system/all: system/CMakeFiles/system.dir/all
+
+.PHONY : system/all
+
+# Recursive "preinstall" directory target.
+system/preinstall:
+
+.PHONY : system/preinstall
+
+# Recursive "clean" directory target.
+system/clean: system/CMakeFiles/system.dir/clean
+
+.PHONY : system/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/nethings.dir
 
 # All Build rule for target.
-CMakeFiles/Nethings.dir/all:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/depend
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=1,2,3 "Built target Nethings"
-.PHONY : CMakeFiles/Nethings.dir/all
+CMakeFiles/nethings.dir/all: system/CMakeFiles/system.dir/all
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/depend
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=1,2,3 "Built target nethings"
+.PHONY : CMakeFiles/nethings.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Nethings.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Nethings.dir/all
+CMakeFiles/nethings.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/nethings.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 0
-.PHONY : CMakeFiles/Nethings.dir/rule
+.PHONY : CMakeFiles/nethings.dir/rule
 
 # Convenience name for target.
-Nethings: CMakeFiles/Nethings.dir/rule
+nethings: CMakeFiles/nethings.dir/rule
 
-.PHONY : Nethings
+.PHONY : nethings
 
 # clean rule for target.
-CMakeFiles/Nethings.dir/clean:
-	$(MAKE) -f CMakeFiles/Nethings.dir/build.make CMakeFiles/Nethings.dir/clean
-.PHONY : CMakeFiles/Nethings.dir/clean
+CMakeFiles/nethings.dir/clean:
+	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/clean
+.PHONY : CMakeFiles/nethings.dir/clean
+
+#=============================================================================
+# Target rules for target system/CMakeFiles/system.dir
+
+# All Build rule for target.
+system/CMakeFiles/system.dir/all:
+	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/depend
+	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=4,5 "Built target system"
+.PHONY : system/CMakeFiles/system.dir/all
+
+# Build rule for subdir invocation for target.
+system/CMakeFiles/system.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 system/CMakeFiles/system.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 0
+.PHONY : system/CMakeFiles/system.dir/rule
+
+# Convenience name for target.
+system: system/CMakeFiles/system.dir/rule
+
+.PHONY : system
+
+# clean rule for target.
+system/CMakeFiles/system.dir/clean:
+	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/clean
+.PHONY : system/CMakeFiles/system.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
