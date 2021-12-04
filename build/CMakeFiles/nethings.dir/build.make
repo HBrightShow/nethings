@@ -95,6 +95,7 @@ nethings: CMakeFiles/nethings.dir/main.cpp.o
 nethings: CMakeFiles/nethings.dir/nethings.cpp.o
 nethings: CMakeFiles/nethings.dir/build.make
 nethings: system/libsystem.a
+nethings: mysql/libnethings_mysql.a
 nethings: CMakeFiles/nethings.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable nethings"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nethings.dir/link.txt --verbose=$(VERBOSE)

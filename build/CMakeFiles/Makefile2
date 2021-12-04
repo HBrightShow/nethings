@@ -55,19 +55,40 @@ CMAKE_BINARY_DIR = /home/hml/xiaozhong/code/nethings/build
 # The main recursive "all" target.
 all: CMakeFiles/nethings.dir/all
 all: system/all
+all: mysql/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: system/preinstall
+preinstall: mysql/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/nethings.dir/clean
 clean: system/clean
+clean: mysql/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory mysql
+
+# Recursive "all" directory target.
+mysql/all: mysql/CMakeFiles/nethings_mysql.dir/all
+
+.PHONY : mysql/all
+
+# Recursive "preinstall" directory target.
+mysql/preinstall:
+
+.PHONY : mysql/preinstall
+
+# Recursive "clean" directory target.
+mysql/clean: mysql/CMakeFiles/nethings_mysql.dir/clean
+
+.PHONY : mysql/clean
 
 #=============================================================================
 # Directory level rules for directory system
@@ -92,6 +113,7 @@ system/clean: system/CMakeFiles/system.dir/clean
 
 # All Build rule for target.
 CMakeFiles/nethings.dir/all: system/CMakeFiles/system.dir/all
+CMakeFiles/nethings.dir/all: mysql/CMakeFiles/nethings_mysql.dir/all
 	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/depend
 	$(MAKE) -f CMakeFiles/nethings.dir/build.make CMakeFiles/nethings.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=1,2,3 "Built target nethings"
@@ -99,7 +121,7 @@ CMakeFiles/nethings.dir/all: system/CMakeFiles/system.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/nethings.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/nethings.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 0
 .PHONY : CMakeFiles/nethings.dir/rule
@@ -121,7 +143,7 @@ CMakeFiles/nethings.dir/clean:
 system/CMakeFiles/system.dir/all:
 	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/depend
 	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=4,5 "Built target system"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=10,11 "Built target system"
 .PHONY : system/CMakeFiles/system.dir/all
 
 # Build rule for subdir invocation for target.
@@ -140,6 +162,33 @@ system: system/CMakeFiles/system.dir/rule
 system/CMakeFiles/system.dir/clean:
 	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/clean
 .PHONY : system/CMakeFiles/system.dir/clean
+
+#=============================================================================
+# Target rules for target mysql/CMakeFiles/nethings_mysql.dir
+
+# All Build rule for target.
+mysql/CMakeFiles/nethings_mysql.dir/all:
+	$(MAKE) -f mysql/CMakeFiles/nethings_mysql.dir/build.make mysql/CMakeFiles/nethings_mysql.dir/depend
+	$(MAKE) -f mysql/CMakeFiles/nethings_mysql.dir/build.make mysql/CMakeFiles/nethings_mysql.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hml/xiaozhong/code/nethings/build/CMakeFiles --progress-num=4,5,6,7,8,9 "Built target nethings_mysql"
+.PHONY : mysql/CMakeFiles/nethings_mysql.dir/all
+
+# Build rule for subdir invocation for target.
+mysql/CMakeFiles/nethings_mysql.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 6
+	$(MAKE) -f CMakeFiles/Makefile2 mysql/CMakeFiles/nethings_mysql.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hml/xiaozhong/code/nethings/build/CMakeFiles 0
+.PHONY : mysql/CMakeFiles/nethings_mysql.dir/rule
+
+# Convenience name for target.
+nethings_mysql: mysql/CMakeFiles/nethings_mysql.dir/rule
+
+.PHONY : nethings_mysql
+
+# clean rule for target.
+mysql/CMakeFiles/nethings_mysql.dir/clean:
+	$(MAKE) -f mysql/CMakeFiles/nethings_mysql.dir/build.make mysql/CMakeFiles/nethings_mysql.dir/clean
+.PHONY : mysql/CMakeFiles/nethings_mysql.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

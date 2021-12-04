@@ -17,6 +17,10 @@
 #include "system/system.h"
 #include "system/common.h"
 
+#include "mysql/DBPool.h"
+#include "mysql/DBConn.h"
+#include "mysql/TableOPerator.h"
+
 
 
 // using namespace muduo;
@@ -130,6 +134,11 @@ int init_config_file(std::string cfg){
     return 0;
 }
 
+void test_mysql(){
+
+    
+}
+
 int main(int argc, char** argv)
 {
     
@@ -207,12 +216,7 @@ int main(int argc, char** argv)
         }    
     }
 
-
-
-
-
-
-
+    test_mysql();
  #if 0 
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);

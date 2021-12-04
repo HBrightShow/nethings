@@ -3,7 +3,6 @@
 
 
 
-const uint32_t max_file_path_size = 255;
 const uint32_t max_logfile_size_rollback = 1024*1024*20;
 
 const std::string name_config_file = "config.xml";

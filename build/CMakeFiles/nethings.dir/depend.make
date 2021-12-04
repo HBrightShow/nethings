@@ -21,6 +21,13 @@ CMakeFiles/nethings.dir/main.cpp.o: ../muduobuild/release-install-cpp11/include/
 CMakeFiles/nethings.dir/main.cpp.o: ../muduobuild/release-install-cpp11/include/muduo/net/TcpServer.h
 CMakeFiles/nethings.dir/main.cpp.o: ../muduobuild/release-install-cpp11/include/muduo/net/TimerId.h
 CMakeFiles/nethings.dir/main.cpp.o: ../main.cpp
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/Common.h
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/DBConn.h
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/DBPool.h
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/PrepareStatement.h
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/ResultSet.h
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/TableOPerator.h
+CMakeFiles/nethings.dir/main.cpp.o: ../mysql/ThreadNotify.h
 CMakeFiles/nethings.dir/main.cpp.o: ../nethings.h
 CMakeFiles/nethings.dir/main.cpp.o: ../system/common.h
 CMakeFiles/nethings.dir/main.cpp.o: ../system/system.h

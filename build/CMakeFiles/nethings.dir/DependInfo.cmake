@@ -17,6 +17,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/hml/xiaozhong/code/nethings/build/system/CMakeFiles/system.dir/DependInfo.cmake"
+  "/home/hml/xiaozhong/code/nethings/build/mysql/CMakeFiles/nethings_mysql.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

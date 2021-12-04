@@ -136,6 +136,19 @@ system/fast:
 	$(MAKE) -f system/CMakeFiles/system.dir/build.make system/CMakeFiles/system.dir/build
 .PHONY : system/fast
 
+#=============================================================================
+# Target rules for targets named nethings_mysql
+
+# Build rule for target.
+nethings_mysql: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nethings_mysql
+.PHONY : nethings_mysql
+
+# fast build rule for target.
+nethings_mysql/fast:
+	$(MAKE) -f mysql/CMakeFiles/nethings_mysql.dir/build.make mysql/CMakeFiles/nethings_mysql.dir/build
+.PHONY : nethings_mysql/fast
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -200,6 +213,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... nethings"
 	@echo "... system"
+	@echo "... nethings_mysql"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

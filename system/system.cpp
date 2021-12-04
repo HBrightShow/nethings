@@ -1,5 +1,6 @@
 #include<iostream>
 #include<unistd.h>
+#include<linux/limits.h>
 #include "system.h"
 #include "common.h"
 
@@ -25,9 +26,9 @@ App::~App()
 int App::init()
 {
     //init path of worksapce
-    char buf[max_file_path_size];
+    char buf[PATH_MAX];
     memset(buf, 0, sizeof(buf));
-    getcwd(buf, max_file_path_size);
+    getcwd(buf, PATH_MAX);
     g_workpath = std::string(buf);
 
     g_logfile = std::unique_ptr<muduo::LogFile>(new muduo::LogFile(g_workpath + "/" + name_log_file, max_logfile_size_rollback,true ));

@@ -33,22 +33,15 @@ set(CXX_FLAGS
 )
 
 set(IMPORTLIB  
-
-
     -lboost_system
+    -lboost_filesystem
     -lboost_program_options
-    
-    #-lpthread
+    -lmysqlclient
+    -lpthread
     #-lprotobuf
-    #-lmuduo_base_cpp11
-   
+    -lmuduo_base
+    -lmuduo_net
  )
-
-
-
-#find_package(Boost COMPONENTS program_options)
-#include_directories(${Boost_INCLUDE_DIRS})
-#link_directories(${Boost_LIBRARY_DIRS})
 
 # 查找当前目录下的所有源文件
 # 并将名称保存到 DIR_SRCS 变量
@@ -58,14 +51,13 @@ aux_source_directory(. DIR_MAIN_SRCS)
 include_directories(./muduobuild/release-install-cpp11/include) 
 
 add_subdirectory(system)
+add_subdirectory(mysql)
 
 #添加需要链接的库文件目录,参数是全路径
 link_directories(~/xiaozhong/code/nethings/muduobuild/release-install-cpp11/lib  /usr/lib /lib/x86_64-linux-gnu)
 
-
-
-
 # 指定生成目标
 add_executable(nethings ${DIR_MAIN_SRCS} )
-#target_link_libraries(Nethings ${SYSTEM_LIB})
-target_link_libraries(nethings system libmuduo_net.a libmuduo_base.a libmuduo_curl.a libpthread.so libboost_program_options.so libboost_system.so libboost_filesystem.so)
+
+
+target_link_libraries(nethings system nethings_mysql ${IMPORTLIB}   )
