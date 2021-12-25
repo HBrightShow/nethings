@@ -2,8 +2,8 @@
 
 
 MsgBase::MsgBase() {
-    m_type = msg_arm_type::MSG_ARM_START;
-    m_content.reserve(100);
+    m_type = MSG_ARM_START;
+    m_data.reserve(512);
     
 }
 

@@ -270,6 +270,12 @@ stdint.h
 pthread.h
 -
 
+/home/hml/xiaozhong/code/nethings/nethings.cpp
+./nethings.h
+/home/hml/xiaozhong/code/nethings/nethings.h
+muduo/base/Logging.h
+/home/hml/xiaozhong/code/nethings/muduo/base/Logging.h
+
 /home/hml/xiaozhong/code/nethings/nethings.h
 muduo/net/TcpServer.h
 /home/hml/xiaozhong/code/nethings/muduo/net/TcpServer.h
