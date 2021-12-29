@@ -1,3 +1,5 @@
+
+#include"muduo/base/BlockingQueue.h"
 #include "./nethings.h"
 
 #include "muduo/base/Logging.h"
@@ -37,9 +39,15 @@ void NethingsServer::onMessage(const muduo::net::TcpConnectionPtr& conn,
                            muduo::net::Buffer* buf,
                            muduo::Timestamp time)
 {
+  
   muduo::string msg(buf->retrieveAllAsString());
   LOG_INFO << conn->name() << "  " << time.toString() << "data size: " << msg.size() 
               << " data content: " << msg;
+
+
+    muduo::BlockingQueue<std::string>  msg_queue;
+    msg_queue.put(msg);
+
   conn->send(msg);
 }
 

@@ -1,9 +1,0 @@
-/home/hml/xiaozhong/code/nethings/build/CMakeFiles/rebuild_cache.dir
-/home/hml/xiaozhong/code/nethings/build/CMakeFiles/edit_cache.dir
-/home/hml/xiaozhong/code/nethings/build/CMakeFiles/nethings.dir
-/home/hml/xiaozhong/code/nethings/build/system/CMakeFiles/rebuild_cache.dir
-/home/hml/xiaozhong/code/nethings/build/system/CMakeFiles/edit_cache.dir
-/home/hml/xiaozhong/code/nethings/build/system/CMakeFiles/system.dir
-/home/hml/xiaozhong/code/nethings/build/mysql/CMakeFiles/rebuild_cache.dir
-/home/hml/xiaozhong/code/nethings/build/mysql/CMakeFiles/edit_cache.dir
-/home/hml/xiaozhong/code/nethings/build/mysql/CMakeFiles/nethings_mysql.dir

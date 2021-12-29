@@ -217,7 +217,7 @@ int main(int argc, char** argv)
     }
 
     test_mysql();
- #if 0 
+ #if 1
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);
   NethingsServer server(&loop, listenAddr);
