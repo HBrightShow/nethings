@@ -18,12 +18,11 @@ DBConn::~DBConn()
 	}
 }
 
-int DBConn::Init()
+int DBConn::init()
 {
 	m_mysql = mysql_init(NULL);
 	if (NULL == m_mysql)
 	{
-
 		return -1;
 	}
 
@@ -33,8 +32,8 @@ int DBConn::Init()
 
 	
 
-	if (!mysql_real_connect(m_mysql,m_pDbPool->GetDBServerHostIp(),m_pDbPool->GetUserName(),m_pDbPool->GetUSerPasswd(),
-		m_pDbPool->GetDBName(),m_pDbPool->GetDBServerPort(),NULL,0))
+	if (!mysql_real_connect(m_mysql,m_pDbPool->getDBServerHostIp(),m_pDbPool->getUserName(),m_pDbPool->getUSerPasswd(),
+		m_pDbPool->getDBName(),m_pDbPool->getDBServerPort(),NULL,0))
 	{
 		cout << "connect error " << mysql_error(m_mysql) << endl;
 		return -1;
@@ -42,7 +41,7 @@ int DBConn::Init()
 	return 0;
 }
 
-bool DBConn::ExecuteCreate(const char*sql_query)
+bool DBConn::executeCreate(const char*sql_query)
 {
 	mysql_ping(m_mysql);
 	if (mysql_real_query(m_mysql,sql_query,strlen(sql_query)))
@@ -53,7 +52,7 @@ bool DBConn::ExecuteCreate(const char*sql_query)
 	return true;
 }
 
-bool DBConn::ExecuteDrop(const char*sql_query)
+bool DBConn::executeDrop(const char*sql_query)
 {
 
 	mysql_ping(m_mysql);
@@ -65,7 +64,7 @@ bool DBConn::ExecuteDrop(const char*sql_query)
 	return true;
 }
 
-bool DBConn::ExecuteUpdate(const char*sql_query, bool care_affected_rows /*= true*/)
+bool DBConn::executeUpdate(const char*sql_query, bool care_affected_rows /*= true*/)
 {
 	mysql_ping(m_mysql);
 	if (mysql_real_query(m_mysql, sql_query, strlen(sql_query)))
@@ -89,12 +88,12 @@ bool DBConn::ExecuteUpdate(const char*sql_query, bool care_affected_rows /*= tru
 	return true;
 }
 
-unsigned int DBConn::GetInsertId()
+unsigned int DBConn::getInsertId()
 {
 	return (uint32_t)mysql_insert_id(m_mysql);
 }
 
-bool DBConn::StartTransaction()
+bool DBConn::startTransaction()
 {
 	mysql_ping(m_mysql);
 	if (mysql_real_query(m_mysql, "start transaction\n", 17)) {
@@ -104,7 +103,7 @@ bool DBConn::StartTransaction()
 	return true;
 }
 
-bool DBConn::Commit()
+bool DBConn::commit()
 {
 
 	mysql_ping(m_mysql);
@@ -115,7 +114,7 @@ bool DBConn::Commit()
 	return true;
 }
 
-bool DBConn::Rollback()
+bool DBConn::rollback()
 {
 	mysql_ping(m_mysql);
 	if (mysql_real_query(m_mysql, "rollback\n", 8)) {
@@ -126,12 +125,12 @@ bool DBConn::Rollback()
 
 }
 
-const char * DBConn::GetPoolName()
+const char * DBConn::getPoolName()
 {
-	return m_pDbPool->GetPoolName();
+	return m_pDbPool->getPoolName();
 }
 
-ResultSet* DBConn::ExecuteQuery(const char*sql_query)
+ResultSet* DBConn::executeQuery(const char*sql_query)
 {
 	mysql_ping(m_mysql);
 

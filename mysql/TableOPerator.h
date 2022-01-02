@@ -21,7 +21,7 @@ public:
 	virtual bool queryUser(uint32_t id = 1) = 0;
 
 
-	DBConn *GetConn() { return conn; }
+	DBConn *getConn() { return conn; }
 private:
 	DBConn *conn;
 
@@ -81,7 +81,7 @@ bool UserTable::insertUser()
 	strSql = "insert into IMUser(`salt`,`sex`,`nick`,`password`,`domain`,`name`,`phone`,`email`,`company`,`address`,`avatar`,`sign_info`,`departId`,`status`,`created`,`updated`) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	PrepareStatement* stmt = new PrepareStatement();
-	MYSQL *mysql = this->GetConn()->GetMysql();
+	MYSQL *mysql = this->getConn()->getMysql();
 
 
 	if (stmt->Init(mysql, strSql)) {
@@ -110,10 +110,10 @@ bool UserTable::insertUser()
 		stmt->setParam(index++, nNow);
 
 		
-		bRet = stmt->ExecuteUpdate();
+		bRet = stmt->executeUpdate();
 		if (bRet)
 		{
-			uint32_t id = stmt->GetInsertId();
+			uint32_t id = stmt->getInsertId();
 			if(id %300 == 0)
 				printf("register then get User_id%d\n", id);
 		}
@@ -141,7 +141,7 @@ bool UserTable::updateInfo(uint32_t id) {
 		+ "', `departId`='" + int2string(nDeptId) + "', `status`=" + int2string(nStatus) + ", `updated`=" + int2string(nNow)
 		+ ", `company`='" + strCompany + "', `address`='" + strAddress + "' where id=" + int2string(id);
 
-	bRet = GetConn()->ExecuteUpdate(strSql.c_str());
+	bRet = getConn()->executeUpdate(strSql.c_str());
 	if (!bRet)
 	{
 		printf("update user fail %s\n",strSql.c_str());
@@ -154,25 +154,25 @@ bool UserTable::queryUser(uint32_t id)
 
 	string strsql = "select * from IMUser where id=" + int2string(id);
 
-	ResultSet *pResultSet = GetConn()->ExecuteQuery(strsql.c_str());
+	ResultSet *pResultSet = getConn()->executeQuery(strsql.c_str());
 
 	bool bRet = false;
 	if (pResultSet)
 	{
-		if (pResultSet->Next())
+		if (pResultSet->next())
 		{
-			nId = pResultSet->GetInt("id");
-			nSex = pResultSet->GetInt("sex");
-			strNick = pResultSet->GetString("nick");
-			strDomain = pResultSet->GetString("domain");
-			strName = pResultSet->GetString("name");
-			strTel = pResultSet->GetString("phone");
-			strEmail = pResultSet->GetString("email");
-			strAvatar = pResultSet->GetString("avatar");
-			sign_info = pResultSet->GetString("sign_info");
-			nDeptId = pResultSet->GetInt("departId");
-			nValidateMethod = pResultSet->GetInt("validateMethod");
-			nStatus = pResultSet->GetInt("status");
+			nId = pResultSet->getInt("id");
+			nSex = pResultSet->getInt("sex");
+			strNick = pResultSet->getString("nick");
+			strDomain = pResultSet->getString("domain");
+			strName = pResultSet->getString("name");
+			strTel = pResultSet->getString("phone");
+			strEmail = pResultSet->getString("email");
+			strAvatar = pResultSet->getString("avatar");
+			sign_info = pResultSet->getString("sign_info");
+			nDeptId = pResultSet->getInt("departId");
+			nValidateMethod = pResultSet->getInt("validateMethod");
+			nStatus = pResultSet->getInt("status");
 
 			printf("nId:%u\n", nId);
 			printf("nSex:%u\n", nSex);

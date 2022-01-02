@@ -9,28 +9,28 @@ CThreadNotify::CThreadNotify()
 }
 void CThreadNotify::init(){
 	
-	pthread_mutexattr_init(&m_mutexattr);
-	pthread_mutexattr_settype(&m_mutexattr, PTHREAD_MUTEX_RECURSIVE);
+	pthread_mutexattr_init(&m_mutexAttr);
+	pthread_mutexattr_settype(&m_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
 
-	pthread_mutex_init(&m_mutex, &m_mutexattr);
+	pthread_mutex_init(&m_mutex, &m_mutexAttr);
 	pthread_cond_init(&m_cond, NULL);
 }
-void CThreadNotify::Lock()
+void CThreadNotify::lock()
 {
 	 pthread_mutex_lock(&m_mutex); 
 }
 
-void CThreadNotify::UnLock()
+void CThreadNotify::unLock()
 {
 	pthread_mutex_unlock(&m_mutex);
 }
 
-void CThreadNotify::Wait()
+void CThreadNotify::wait()
 {
 	pthread_cond_wait(&m_cond, &m_mutex);
 }
 
-int CThreadNotify::WaitTime(int ms)
+int CThreadNotify::waitTime(int ms)
 {
 	struct timespec outtime;
 	clock_gettime(CLOCK_MONOTONIC, &outtime);
@@ -47,7 +47,7 @@ int CThreadNotify::WaitTime(int ms)
 CThreadNotify::~CThreadNotify()
 {
 	
-		pthread_mutexattr_destroy(&m_mutexattr);
+		pthread_mutexattr_destroy(&m_mutexAttr);
 		pthread_mutex_destroy(&m_mutex);
 		pthread_cond_destroy(&m_cond);
 	

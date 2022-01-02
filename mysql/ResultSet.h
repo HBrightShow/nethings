@@ -3,7 +3,7 @@
 #define  RESULT_H
 
 #include<map>
-#include<mysql.h>
+#include "Common.h"
 
 using namespace std;
 
@@ -15,17 +15,17 @@ public:
 	ResultSet(MYSQL_RES*);
 	virtual ~ResultSet();
 
-	bool Next();
-	int GetInt(const char *key);
-	char *GetString(const char* key);
+	bool next();
+	int getInt(const char *key);
+	char *getString(const char* key);
 
 private:
-	int GetIndex(const char* key);
+	int getIndex(const char* key);
 
 	MYSQL_RES * m_res;
 	MYSQL_ROW m_row;
 
-	map<string, int> m_key_map;
+	map<string, int> m_keyMap;
 };
 };
 

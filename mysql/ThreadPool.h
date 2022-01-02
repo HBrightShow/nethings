@@ -183,7 +183,7 @@ static void *threadpoll_function(void *arg) {
 
 	uint64_t start_time = get_tick_count();
 	uint64_t end_time = get_tick_count();
-	while (1) {
+	while (true) {
 
 		pthread_mutex_lock(&(pool->m_mutex));
 

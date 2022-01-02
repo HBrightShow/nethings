@@ -14,7 +14,7 @@ ResultSet::ResultSet(MYSQL_RES* res)
 	int i;
 	for ( i =0;i< num_fields;i++)
 	{
-		m_key_map.insert(make_pair(fileds[i].name, i));
+		m_keyMap.insert(make_pair(fileds[i].name, i));
 	}
 }
 
@@ -27,7 +27,7 @@ ResultSet::~ResultSet()
 	}
 }
 
-bool ResultSet::Next()
+bool ResultSet::next()
 {
 	m_row = mysql_fetch_row(m_res);
 	if (m_row)
@@ -37,9 +37,9 @@ bool ResultSet::Next()
 	return false;
 }
 
-int ResultSet::GetInt(const char *key)
+int ResultSet::getInt(const char *key)
 {
-	int idx = GetIndex(key);
+	int idx = getIndex(key);
 	if (idx != -1)
 	{
 		return atoi(m_row[idx]);
@@ -47,9 +47,9 @@ int ResultSet::GetInt(const char *key)
 	return -1;
 }
 
-char * ResultSet::GetString(const char* key)
+char * ResultSet::getString(const char* key)
 {
-	int idx = GetIndex(key);
+	int idx = getIndex(key);
 	if (idx != -1)
 	{
 		return m_row[idx];
@@ -57,10 +57,10 @@ char * ResultSet::GetString(const char* key)
 	return NULL;
 }
 
-int ResultSet::GetIndex(const char* key)
+int ResultSet::getIndex(const char* key)
 {
-	map<string, int>::iterator it = m_key_map.find(key);
-	if (it != m_key_map.end())
+	map<string, int>::iterator it = m_keyMap.find(key);
+	if (it != m_keyMap.end())
 	{
 		return it->second;
 	}

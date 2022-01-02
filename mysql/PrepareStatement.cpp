@@ -5,8 +5,8 @@ using namespace mysql;
 PrepareStatement::PrepareStatement()
 {
 	m_stmt = NULL;
-	m_param_bind = NULL;
-	m_param_cnt = 0;
+	m_paramBind = NULL;
+	m_paramCnt = 0;
 }
 
 PrepareStatement::~PrepareStatement()
@@ -16,14 +16,14 @@ PrepareStatement::~PrepareStatement()
 		mysql_stmt_close(m_stmt);
 		m_stmt = NULL;
 	}
-	if (m_param_bind)
+	if (m_paramBind)
 	{
-		delete[] m_param_bind;
-		m_param_bind = NULL;
+		delete[] m_paramBind;
+		m_paramBind = NULL;
 	}
 }
 
-bool PrepareStatement::Init(MYSQL* mysql, string& sql)
+bool PrepareStatement::Init(MYSQL* mysql, std::string& sql)
 {
 	mysql_ping(mysql);
 	m_stmt = mysql_stmt_init(mysql);
@@ -36,15 +36,15 @@ bool PrepareStatement::Init(MYSQL* mysql, string& sql)
 	{
 		return false;
 	}
-	m_param_cnt = mysql_stmt_param_count(m_stmt);
-	if (m_param_cnt>0)
+	m_paramCnt = mysql_stmt_param_count(m_stmt);
+	if (m_paramCnt>0)
 	{
-		m_param_bind = new MYSQL_BIND[m_param_cnt];
-		if (!m_param_bind)
+		m_paramBind = new MYSQL_BIND[m_paramCnt];
+		if (!m_paramBind)
 		{
 			return false;
 		}
-		memset(m_param_bind,0,sizeof(MYSQL_BIND)*m_param_cnt);
+		std::memset(m_paramBind,0,sizeof(MYSQL_BIND)*m_paramCnt);
 	}
 	return true;
 
@@ -52,83 +52,83 @@ bool PrepareStatement::Init(MYSQL* mysql, string& sql)
 
 void PrepareStatement::setParam(uint32_t index, int &value)
 {
-	if (index > m_param_cnt)
+	if (index > m_paramCnt)
 	{
 		return;
 	}
-	m_param_bind[index].buffer_type = MYSQL_TYPE_LONG;
-	m_param_bind[index].buffer = &value;
+	m_paramBind[index].buffer_type = MYSQL_TYPE_LONG;
+	m_paramBind[index].buffer = &value;
 }
 
 void PrepareStatement::setParam(uint32_t index, uint32_t& value)
 {
-	if (index > m_param_cnt)
+	if (index > m_paramCnt)
 	{
 		return;
 	}
-	m_param_bind[index].buffer_type = MYSQL_TYPE_LONG;
-	m_param_bind[index].buffer = &value;
+	m_paramBind[index].buffer_type = MYSQL_TYPE_LONG;
+	m_paramBind[index].buffer = &value;
 }
 
-void PrepareStatement::setParam(uint32_t index, string& value)
+void PrepareStatement::setParam(uint32_t index, std::string& value)
 {
-	if (index > m_param_cnt)
+	if (index > m_paramCnt)
 	{
 		return;
 	}
-	m_param_bind[index].buffer_type = MYSQL_TYPE_STRING;
-	m_param_bind[index].buffer = (char*)value.c_str();
-	m_param_bind[index].buffer_length = value.size();
+	m_paramBind[index].buffer_type = MYSQL_TYPE_STRING;
+	m_paramBind[index].buffer = (char*)value.c_str();
+	m_paramBind[index].buffer_length = value.size();
 
 }
 
-void PrepareStatement::setParam(uint32_t index, const string & value)
+void PrepareStatement::setParam(uint32_t index, const std::string & value)
 {
-	if (index > m_param_cnt)
+	if (index > m_paramCnt)
 	{
 		return;
 	}
-	m_param_bind[index].buffer_type = MYSQL_TYPE_STRING;
-	m_param_bind[index].buffer = (char*)value.c_str();
-	m_param_bind[index].buffer_length = value.size();
+	m_paramBind[index].buffer_type = MYSQL_TYPE_STRING;
+	m_paramBind[index].buffer = (char*)value.c_str();
+	m_paramBind[index].buffer_length = value.size();
 }
 
 void PrepareStatement::setParam(uint32_t index, uint8_t &value)
 {
-	if (index > m_param_cnt)
+	if (index > m_paramCnt)
 	{
 		return;
 	}
-	m_param_bind[index].buffer_type = MYSQL_TYPE_STRING;
-	m_param_bind[index].buffer = (char*)value;
+	m_paramBind[index].buffer_type = MYSQL_TYPE_STRING;
+	m_paramBind[index].buffer = (char*)(value);
 
 }
 
-bool PrepareStatement::ExecuteUpdate()
+bool PrepareStatement::executeUpdate()
 {
 	if (!m_stmt)
 	{
 		return false;
 	}
-	if (mysql_stmt_bind_param(m_stmt,m_param_bind))
+	if (mysql_stmt_bind_param(m_stmt,m_paramBind))
 	{
-		cout << "stmt bind error" << mysql_stmt_errno(m_stmt) << endl;
+		std::cout << "stmt bind error" << mysql_stmt_errno(m_stmt) << std::endl;
 		return false;
 	}
 	if (int i =mysql_stmt_execute(m_stmt))
 	{
-		cout << "stmt execute error :"<<i<<" " << mysql_stmt_errno(m_stmt) << endl;
+		std::cout << "stmt execute error :"<<i<<" " << mysql_stmt_errno(m_stmt) << std::endl;
 		return false;
 	}
 	if (mysql_stmt_affected_rows(m_stmt) == 0)
 	{
-		cout << "stmt affected error" << mysql_stmt_errno(m_stmt) << endl;
+		std::cout << "stmt affected error" << mysql_stmt_errno(m_stmt) << std::endl;
 		return false;
 	}
 	return true;
 }
 
-uint32_t PrepareStatement::GetInsertId()
+uint32_t PrepareStatement::getInsertId()
 {
 	return mysql_stmt_insert_id(m_stmt);
 }

@@ -1,8 +1,9 @@
 
 #ifndef DBPOOL_H
 #define DBPOOL_H
-#include "ThreadNotify.h"
 #include "Common.h"
+#include "ThreadNotify.h"
+
 
 namespace mysql {
 
@@ -12,40 +13,40 @@ class DBPool {
 public:
 
 	DBPool();
-	DBPool(const char* pname, const char* serverip, unsigned short derverport, 
-	const char* username, const char*passwd, const char*dbname, int max_conn);
+	DBPool(const char* name, const char* ip, unsigned short port, 
+	const char* userName, const char*passwd, const char*dbName, int maxConn);
 
-	int Init();
-	DBConn *GetDBConn();
-	void RelConn(DBConn*);
+	int init();
+	DBConn *getDBConn();
+	void relConn(DBConn*);
 
 	~DBPool();
 
-	const char* GetPoolName() { return m_poolname.c_str(); }
-	const char* GetDBServerHostIp() { return m_db_serverip.c_str(); }
-	unsigned short GetDBServerPort() { return m_db_serverport; }
+	const char* getPoolName() { return m_poolName.c_str(); }
+	const char* getDBServerHostIp() { return m_dbServerIp.c_str(); }
+	unsigned short getDBServerPort() { return m_dbServerPort; }
 
-	const char* GetUserName() { return m_username.c_str(); }
-	const char*GetUSerPasswd() { return m_passwd.c_str(); }
-	const char*GetDBName() { return m_db_name.c_str(); }
+	const char* getUserName() { return m_userName.c_str(); }
+	const char*getUSerPasswd() { return m_passwd.c_str(); }
+	const char*getDBName() { return m_dbName.c_str(); }
 
-	int GetCurConnCnt() { return m_db_cur_conn_cnt; }
-	int GetMaxConnCnt() { return m_db_max_conn_cnt; }
+	int getCurConnCnt() { return m_dbCurConnCnt; }
+	int getMaxConnCnt() { return m_dbMaxConnCnt; }
 
 private:
 	
-	string	m_poolname;
-	string  m_db_serverip;
-	unsigned short m_db_serverport;
-	string m_username;
-	string m_passwd;
-	string m_db_name;
+	std::string	m_poolName;
+	std::string  m_dbServerIp;
+	unsigned short m_dbServerPort;
+	std::string m_userName;
+	std::string m_passwd;
+	std::string m_dbName;
 
-	int m_db_cur_conn_cnt;
-	int m_db_max_conn_cnt;
+	int m_dbCurConnCnt;
+	int m_dbMaxConnCnt;
 
-	list<DBConn*> m_free_list;
-	CThreadNotify m_free_notify;
+	std::list<DBConn*> m_freeList;
+	CThreadNotify m_freeNotify;
 };
 };
 

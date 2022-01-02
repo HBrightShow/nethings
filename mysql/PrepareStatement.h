@@ -1,6 +1,7 @@
 #ifndef PREPARESTATEMENT_H
 #define PREPARESTATEMENT_H
-#include "Common.h"
+
+#include  "Common.h"
 
 namespace mysql {
 
@@ -11,20 +12,20 @@ public:
 	virtual ~PrepareStatement();
 
 
-	bool Init(MYSQL* mysql, string& sql);
+	bool Init(MYSQL* mysql, std::string& sql);
 
 	void setParam(uint32_t index,int &value);
 	void setParam(uint32_t index, uint8_t &value);
 	void setParam(uint32_t index, uint32_t& value);
-	void setParam(uint32_t index, string& value);
-	void setParam(uint32_t index, const string & value);
+	void setParam(uint32_t index, std::string& value);
+	void setParam(uint32_t index, const std::string & value);
 
-	bool ExecuteUpdate();
-	uint32_t GetInsertId();
+	bool executeUpdate();
+	uint32_t getInsertId();
 private:
 	MYSQL_STMT*		m_stmt;
-	MYSQL_BIND *	m_param_bind;
-	uint32_t		m_param_cnt;
+	MYSQL_BIND *	m_paramBind;
+	uint32_t		m_paramCnt;
 };
 
 };

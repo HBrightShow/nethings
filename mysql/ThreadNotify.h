@@ -11,22 +11,22 @@ class CThreadNotify {
 public:
 	CThreadNotify();
 
-	void Lock(); 
-	void UnLock(); 
-	void Wait(); 
+	void lock(); 
+	void unLock(); 
+	void wait(); 
 	void init();
-	void Signal() {
+	void signal() {
 		pthread_cond_signal(&m_cond);
 	}
-	int WaitTime(int ms);
+	int waitTime(int ms);
 
 	~CThreadNotify();
 	
 private:
 
-	pthread_mutex_t m_mutex;		//������
-	pthread_mutexattr_t m_mutexattr;//����������
-	pthread_cond_t m_cond;	//
+	pthread_mutex_t m_mutex;		
+	pthread_mutexattr_t m_mutexAttr;
+	pthread_cond_t m_cond;	
 };
 
 };

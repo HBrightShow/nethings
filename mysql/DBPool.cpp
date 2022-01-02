@@ -2,7 +2,7 @@
 
 #include "DBPool.h"
 #include "DBConn.h"
-#include "Common.h"
+
 
 using namespace mysql;
 
@@ -11,24 +11,24 @@ DBPool::DBPool()
 
 }
 
-DBPool::DBPool(const char* pname, const char* serverip, unsigned short derverport, const char* username, const char*passwd, const char*dbname, int max_conn)
+DBPool::DBPool(const char* name, const char* ip, unsigned short port, const char* userName, const char*passwd, const char*dbName, int maxConn)
 {
-	m_poolname = pname;
-	m_db_serverip = serverip;
-	m_db_serverport = derverport;
-	m_username = username;
+	m_poolName = name;
+	m_dbServerIp = ip;
+	m_dbServerPort = port;
+	m_userName = userName;
 	m_passwd = passwd;
-	m_db_name = dbname;
+	m_dbName = dbName;
 
-	m_db_cur_conn_cnt = 1;
-	m_db_max_conn_cnt = max_conn;
+	m_dbCurConnCnt = 1;
+	m_dbMaxConnCnt = maxConn;
 
-	 m_free_list.clear();
-	m_free_notify.init();
+	 m_freeList.clear();
+	m_freeNotify.init();
 
 }
 
-int DBPool::Init()
+int DBPool::init()
 {
 	int i = 0;
 	for (i=0;i<1;i++)
@@ -38,58 +38,58 @@ int DBPool::Init()
 		{
 			continue;
 		}
-		int ret = pDbConn->Init();
+		int ret = pDbConn->init();
 		if (ret)
 		{
 			delete pDbConn;
 			return ret;
 		}
-		m_free_list.push_back(pDbConn);
-	//	m_db_cur_conn_cnt ++;
+		m_freeList.push_back(pDbConn);
+	//	m_dbCurConnCnt ++;
 	
 	}
 	return 0;
 }
 
-DBConn * DBPool::GetDBConn()
+DBConn * DBPool::getDBConn()
 {
-	m_free_notify.Lock();
-	while(m_free_list.empty())
+	m_freeNotify.lock();
+	while(m_freeList.empty())
 	{
-		if (m_db_cur_conn_cnt >= m_db_max_conn_cnt)
+		if (m_dbCurConnCnt >= m_dbMaxConnCnt)
 		{
-			m_free_notify.Wait();
+			m_freeNotify.wait();
 		}
 		else
 		{
 			DBConn * conn = new DBConn(this);
-			if (conn->Init() != 0)
+			if (conn->init() != 0)
 			{
 				delete conn;
-				m_free_notify.UnLock();
+				m_freeNotify.unLock();
 				return NULL;
 			}
 
-			m_free_list.push_back(conn);
-			m_db_cur_conn_cnt++;
-			printf("conn %d\n",m_db_cur_conn_cnt);
+			m_freeList.push_back(conn);
+			m_dbCurConnCnt++;
+			printf("conn %d\n",m_dbCurConnCnt);
 		}
 	}
 
-	DBConn *pconn = m_free_list.front();
+	DBConn *pconn = m_freeList.front();
 
-	m_free_list.pop_front();
+	m_freeList.pop_front();
 	
-	m_free_notify.UnLock();
+	m_freeNotify.unLock();
 	return pconn;
 }
 
-void DBPool::RelConn(DBConn* conn)
+void DBPool::relConn(DBConn* conn)
 {
-	m_free_notify.Lock();
+	m_freeNotify.lock();
 	
-	list<DBConn*>::iterator it = m_free_list.begin();
-	for (;it != m_free_list.end();it ++)
+	std::list<DBConn*>::iterator it = m_freeList.begin();
+	for (;it != m_freeList.end();it ++)
 	{
 		if (*it == conn)
 		{
@@ -97,23 +97,23 @@ void DBPool::RelConn(DBConn* conn)
 		}
 	}
 
-	if (it == m_free_list.end())
+	if (it == m_freeList.end())
 	{
-		m_free_list.push_back(conn);
+		m_freeList.push_back(conn);
 	}
 	
-	m_free_notify.Signal();
-	m_free_notify.UnLock();
+	m_freeNotify.signal();
+	m_freeNotify.unLock();
 }
 
 DBPool::~DBPool()
 {
-	list<DBConn*>::iterator it = m_free_list.begin();
+	std::list<DBConn*>::iterator it = m_freeList.begin();
 	
-	for (; it != m_free_list.end(); it++) {
+	for (; it != m_freeList.end(); it++) {
 
 		DBConn* pconn = *it;
 		delete pconn;
 	}
-	m_free_list.clear();
+	m_freeList.clear();
 }
