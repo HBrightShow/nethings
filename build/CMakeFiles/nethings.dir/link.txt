@@ -1,1 +1,0 @@
-/usr/bin/c++   -DSTATICLIB  -rdynamic CMakeFiles/nethings.dir/main.cpp.o CMakeFiles/nethings.dir/nethings.cpp.o  -o nethings  -L/home/hml/nethings/muduo/lib -Wl,-rpath,/home/hml/nethings/muduo/lib system/libsystem.a mysql/libnethings_mysql.a -lboost_system -lboost_filesystem -lboost_program_options -lmysqlclient -pthread -lmuduo_base -lmuduo_net -lhiredis 
