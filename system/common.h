@@ -1,6 +1,7 @@
 #ifndef _NETHING_COMMON_H_
 #define _NETHING_COMMON_H_
 
+#include "../mysql/Common.h"
 
 
 const uint32_t max_logfile_size_rollback = 1024*1024*20;
@@ -18,6 +19,10 @@ enum  global_error_code{
 };
 
 
+
+typedef struct stXmlCfg{
+    mysql::stMysqlConnInfo mysqlConnInfo;
+}stXmlCfg,*PstXmlCfg;
 
 
 

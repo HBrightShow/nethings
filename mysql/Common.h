@@ -7,19 +7,16 @@
 #include<cstring>
 
 
+namespace mysql {
 
 
+struct stMysqlConnInfo{
+    std::string dbServerIp;
+    std::string dbPort;
+    std::string dbName;
+    std::string dbUser;
+    std::string dbPassword;
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
+};
 #endif

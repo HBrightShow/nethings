@@ -25,6 +25,13 @@ App::~App()
 
 int App::init()
 {
+    setLogInfo();
+
+    return 0;
+}
+
+bool App::setLogInfo(){
+
     //init path of worksapce
     char buf[PATH_MAX];
     memset(buf, 0, sizeof(buf));
@@ -32,6 +39,8 @@ int App::init()
     g_workpath = std::string(buf);
 
     g_logfile = std::unique_ptr<muduo::LogFile>(new muduo::LogFile(g_workpath + "/" + name_log_file, max_logfile_size_rollback,true ));
+}
 
-    return 0;
+bool App::getXmlConfig() {
+    
 }

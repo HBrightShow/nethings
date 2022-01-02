@@ -17,6 +17,8 @@ public:
 
     //logfile ptr
     std::unique_ptr<muduo::LogFile> g_logfile;
+    
+    std::unique_ptr<stXmlCfg> g_xmlCfg;
 
 
 private:
@@ -33,6 +35,8 @@ private:
     const App &operator=(const App &signal);
 
     int  init();
+    bool setLogInfo();
+    bool getXmlConfig();
 
 private:
     

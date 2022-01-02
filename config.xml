@@ -2,13 +2,14 @@
 <Nethings>
 	<version>1.0</version>
 	<mysql>
-		<ip>0.0.0.0</ip>
+		<ip>192.168.2.65</ip>
 		<port>3306</port>
 		<user>net</user>
 		<password>123456</password>
+		<dbName>shop</dbName>
 	</mysql>
 	<redis>
-		<ip>0.0.0.0</ip>
+		<ip>192.168.2.65</ip>
 		<port>6379</port>
 	</redis>
 </Nethings>

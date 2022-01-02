@@ -20,6 +20,7 @@
 #include "mysql/DBPool.h"
 #include "mysql/DBConn.h"
 #include "mysql/TableOPerator.h"
+#include "mysql/Common.h"
 
 #include <hiredis/hiredis.h>
 
@@ -31,6 +32,8 @@
 namespace opt = boost::program_options;
 namespace bfs = boost::filesystem;
 namespace bpt = boost::property_tree;
+
+
 
 int set_env(){
 
@@ -59,14 +62,15 @@ int create_config_file(std::string cfg) {
         root.add_child("Nethings", version);
 
         bpt::ptree sqlInfo;
-        sqlInfo.put<std::string>("ip","0.0.0.0");
+        sqlInfo.put<std::string>("ip","192.168.2.65");
         sqlInfo.put<int>("port", 3306);
         sqlInfo.put<std::string>("user","net");
         sqlInfo.put<std::string>("password","123456");
+        sqlInfo.put<std::string>("dbName", "shop");
         root.add_child("Nethings.mysql", sqlInfo);
 
         bpt::ptree redisInfo;
-        redisInfo.put<std::string> ("ip", "0.0.0.0");
+        redisInfo.put<std::string> ("ip", "192.168.2.65");
         redisInfo.put<int>("port", 6379);
         root.add_child("Nethings.redis", redisInfo);
 
@@ -84,7 +88,7 @@ int create_config_file(std::string cfg) {
     return 0;
 }
 
-int read_config_file(std::string cfg) {
+int read_config_file(std::string& cfg, stXmlCfg& xmlCfg) {
 
     bpt::ptree root;
     try{
@@ -101,15 +105,44 @@ int read_config_file(std::string cfg) {
 
     std::string version = root.get<std::string>("Nethings.version");
 
-    bpt::ptree sql_info = root.get_child("Nethings.mysql");
-    for(auto& v : sql_info) {
+    bpt::ptree sqlInfo = root.get_child("Nethings.mysql");
+
+    std::string strKey;
+ 
+    for(auto& v : sqlInfo) {
+        strKey = v.first;
+        if (strKey == std::string("ip")) {
+            xmlCfg.mysqlConnInfo.dbServerIp = v.second.data();
+        }
+        else if(strKey == std::string("port")) {
+            xmlCfg.mysqlConnInfo.dbPort = v.second.data();
+        }
+         else if(strKey == std::string("user")) {
+            xmlCfg.mysqlConnInfo.dbName = v.second.data();
+        }
+         else if(strKey == std::string("dbName")) {
+            xmlCfg.mysqlConnInfo.dbUser = v.second.data();
+        }
+         else if(strKey == std::string("password")) {
+            xmlCfg.mysqlConnInfo.dbPassword = v.second.data();
+        }
+        else {
+            std::string info = std::string("read_config_file()  unknown mysql config") + "\n"; 
+            write_log_to_file(info);
+        }
+
         std::cout << v.first << ":" << v.second.data() << std::endl;
+
     }
+
+    
+
+
 
     return 0;
 }
 
-int init_config_file(std::string cfg){
+int init_config_file(const std::string& cfg){
     try{
         App& app = App::GetInstance();
         
