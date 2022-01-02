@@ -4,6 +4,7 @@
 
 #include "Common.h"
 
+namespace mysql {
 
 #define MAX_ESCAPE_STRING_LEN 10240
 class ResultSet;
@@ -34,5 +35,8 @@ private:
 	MYSQL* m_mysql;
 	char m_escape_string[MAX_ESCAPE_STRING_LEN + 1];
 };
+
+};
+
 #endif
 

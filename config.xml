@@ -2,9 +2,13 @@
 <Nethings>
 	<version>1.0</version>
 	<mysql>
-		<ip>127.0.0.1</ip>
-		<port>8000</port>
-		<user>sa</user>
-		<password>bright=250</password>
+		<ip>0.0.0.0</ip>
+		<port>3306</port>
+		<user>net</user>
+		<password>123456</password>
 	</mysql>
+	<redis>
+		<ip>0.0.0.0</ip>
+		<port>6379</port>
+	</redis>
 </Nethings>

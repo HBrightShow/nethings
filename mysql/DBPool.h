@@ -4,6 +4,7 @@
 #include "ThreadNotify.h"
 #include "Common.h"
 
+namespace mysql {
 
 class DBConn;
 class DBPool {
@@ -46,6 +47,6 @@ private:
 	list<DBConn*> m_free_list;
 	CThreadNotify m_free_notify;
 };
-
+};
 
 #endif

@@ -21,6 +21,8 @@
 #include "mysql/DBConn.h"
 #include "mysql/TableOPerator.h"
 
+#include <hiredis/hiredis.h>
+
 
 
 // using namespace muduo;
@@ -57,11 +59,16 @@ int create_config_file(std::string cfg) {
         root.add_child("Nethings", version);
 
         bpt::ptree sqlInfo;
-        sqlInfo.put<std::string>("ip","127.0.0.1");
-        sqlInfo.put<int>("port", 8000);
-        sqlInfo.put<std::string>("user","sa");
-        sqlInfo.put<std::string>("password","bright=250");
+        sqlInfo.put<std::string>("ip","0.0.0.0");
+        sqlInfo.put<int>("port", 3306);
+        sqlInfo.put<std::string>("user","net");
+        sqlInfo.put<std::string>("password","123456");
         root.add_child("Nethings.mysql", sqlInfo);
+
+        bpt::ptree redisInfo;
+        redisInfo.put<std::string> ("ip", "0.0.0.0");
+        redisInfo.put<int>("port", 6379);
+        root.add_child("Nethings.redis", redisInfo);
 
         bpt::write_xml(cfg, root, std::locale(), bpt::xml_writer_make_settings<std::string>('\t',1));
 
@@ -137,6 +144,29 @@ int init_config_file(std::string cfg){
 void test_mysql(){
 
     
+}
+
+void test_redis() {
+    redisContext* conn = redisConnect("0.0.0.0", 6379);
+
+    if(conn->err) {
+        std::cout << "connect redis falild!" << std::endl;
+        return ;
+    }
+    else {
+        std::cout << "connect redis success!" << std::endl;
+    }
+
+    redisReply* reply = (redisReply*)redisCommand(conn,"set foo 1234");
+    freeReplyObject(reply);
+
+    reply = (redisReply*)redisCommand(conn,"get foo");
+    printf("%s\n",reply->str);
+    freeReplyObject(reply);
+
+    redisFree(conn);
+
+    return ;
 }
 
 int main(int argc, char** argv)
@@ -217,6 +247,7 @@ int main(int argc, char** argv)
     }
 
     test_mysql();
+    test_redis();
  #if 1
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);

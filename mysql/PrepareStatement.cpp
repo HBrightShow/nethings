@@ -1,5 +1,7 @@
 #include "PrepareStatement.h"
 
+using namespace mysql;
+
 PrepareStatement::PrepareStatement()
 {
 	m_stmt = NULL;

@@ -1,6 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+namespace mysql {
 namespace sqlinfo {
 
         static const char *db_pool_name = "mypool";
@@ -13,6 +14,7 @@ namespace sqlinfo {
 
 };
 
+};
 
 
 #endif

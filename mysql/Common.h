@@ -10,7 +10,8 @@
 #include <sys/time.h>
 using namespace std;
 
-
+namespace mysql {
+  
 #define DROP_IMUSER_TABLE	"DROP TABLE IF EXISTS IMUser"  
 
 
@@ -40,5 +41,6 @@ using namespace std;
   KEY `idx_phone` (`phone`) \
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;"   
 
+};
 #endif
 

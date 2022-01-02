@@ -1,6 +1,8 @@
 #include "ResultSet.h"
 #include "DBPool.h"
 
+using namespace mysql;
+
 #define log_err printf
 
 ResultSet::ResultSet(MYSQL_RES* res)

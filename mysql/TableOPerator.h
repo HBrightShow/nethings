@@ -7,6 +7,9 @@
 #include <time.h>
 #include <sstream>
 #include <string>
+
+namespace mysql {
+
 class Table {
 public:
 	Table(DBConn *con) { conn = con; }
@@ -190,5 +193,6 @@ bool UserTable::queryUser(uint32_t id)
 	}
 	return bRet;
 }
+};
 
 #endif 

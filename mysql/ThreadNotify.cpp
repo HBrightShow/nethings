@@ -1,5 +1,8 @@
 #include "ThreadNotify.h"
 
+
+using namespace mysql;
+
 CThreadNotify::CThreadNotify()
 {
 	init();

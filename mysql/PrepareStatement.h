@@ -2,6 +2,8 @@
 #define PREPARESTATEMENT_H
 #include "Common.h"
 
+namespace mysql {
+
 class PrepareStatement {
 
 public:
@@ -23,5 +25,7 @@ private:
 	MYSQL_STMT*		m_stmt;
 	MYSQL_BIND *	m_param_bind;
 	uint32_t		m_param_cnt;
+};
+
 };
 #endif

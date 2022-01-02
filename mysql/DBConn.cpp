@@ -2,6 +2,7 @@
 #include "ResultSet.h"
 #include "DBPool.h"
 
+using namespace mysql;
 
 DBConn::DBConn(DBPool * pool)
 {

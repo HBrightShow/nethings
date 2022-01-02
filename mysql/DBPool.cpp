@@ -3,6 +3,9 @@
 #include "DBPool.h"
 #include "DBConn.h"
 #include "Common.h"
+
+using namespace mysql;
+
 DBPool::DBPool()
 {
 

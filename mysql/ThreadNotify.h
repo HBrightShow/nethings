@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <pthread.h>
 
+namespace mysql {
+
 class CThreadNotify {
 
 public:
@@ -22,9 +24,11 @@ public:
 	
 private:
 
-	pthread_mutex_t m_mutex;		//»¥³âËø
-	pthread_mutexattr_t m_mutexattr;//»¥³âËøÊôĞÔ
+	pthread_mutex_t m_mutex;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	pthread_mutexattr_t m_mutexattr;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	pthread_cond_t m_cond;	//
+};
+
 };
 
 #endif

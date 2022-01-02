@@ -5,6 +5,8 @@
 #include "config.h"
 using namespace sqlinfo;
 
+namespace mysql {
+
 struct job {
 	void *(*callback_function)(void *arg);
 	void *arg;
@@ -153,18 +155,18 @@ public:
 		return 0;
 	}
 public:
-	int m_threadnum;                    //线程池中开启线程的个数
-	int m_QueueMaxNum;                //队列中最大job的个数
-	struct job *m_head;                 //指向job的头指针
-	struct job *m_tail;                 //指向job的尾指针
-	pthread_t  *m_pthreads;       		 //线程池中所有线程的pthread_t
-	pthread_mutex_t m_mutex;            //互斥信号量
-	pthread_cond_t m_cond_QueueEmpty;       //队列为空的条件变量
-	pthread_cond_t m_cond_QueueNotEmpty;   //队列不为空的条件变量
-	pthread_cond_t m_cond_QueueNotFull;    //队列不为满的条件变量
-	int m_CurQueueJobNum;                //队列当前的job个数
+	int m_threadnum;                    //锟竭程筹拷锟叫匡拷锟斤拷锟竭程的革拷锟斤拷
+	int m_QueueMaxNum;                //锟斤拷锟斤拷锟斤拷锟斤拷锟絡ob锟侥革拷锟斤拷
+	struct job *m_head;                 //指锟斤拷job锟斤拷头指锟斤拷
+	struct job *m_tail;                 //指锟斤拷job锟斤拷尾指锟斤拷
+	pthread_t  *m_pthreads;       		 //锟竭程筹拷锟斤拷锟斤拷锟斤拷锟竭程碉拷pthread_t
+	pthread_mutex_t m_mutex;            //锟斤拷锟斤拷锟脚猴拷锟斤拷
+	pthread_cond_t m_cond_QueueEmpty;       //锟斤拷锟斤拷为锟秸碉拷锟斤拷锟斤拷锟斤拷锟斤拷
+	pthread_cond_t m_cond_QueueNotEmpty;   //锟斤拷锟叫诧拷为锟秸碉拷锟斤拷锟斤拷锟斤拷锟斤拷
+	pthread_cond_t m_cond_QueueNotFull;    //锟斤拷锟叫诧拷为锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+	int m_CurQueueJobNum;                //锟斤拷锟叫碉拷前锟斤拷job锟斤拷锟斤拷
 
-	bool m_PoolIsClose;                   //线程池是否已经关闭
+	bool m_PoolIsClose;                   //锟竭程筹拷锟角凤拷锟窖撅拷锟截憋拷
 
 
 };
@@ -297,4 +299,7 @@ static void*WorkNoPool(void *) {
 	delete pdbpool;
 	return NULL;
 }
+
+};
+
 #endif // THREADPOOL_H 

@@ -41,6 +41,7 @@ set(IMPORTLIB
     #-lprotobuf
     -lmuduo_base
     -lmuduo_net
+    -lhiredis
  )
 
 # 查找当前目录下的所有源文件

@@ -2,10 +2,13 @@
 #ifndef  RESULT_H
 #define  RESULT_H
 
-
 #include<map>
 #include<mysql.h>
+
 using namespace std;
+
+namespace mysql {
+
 class ResultSet {
 
 public:
@@ -24,7 +27,7 @@ private:
 
 	map<string, int> m_key_map;
 };
-
+};
 
 #endif 
 
