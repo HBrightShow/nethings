@@ -5,10 +5,11 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<sys/stat.h>
+#include<map>
+#include<boost/any.hpp>
 #include<boost/program_options.hpp>
 #include<boost/filesystem.hpp>
-#include<boost/property_tree/xml_parser.hpp>
-#include<boost/property_tree/ptree.hpp>
+
 
 
 #include "nethings.h"
@@ -16,6 +17,7 @@
 #include "muduo/net/EventLoop.h"
 #include "system/system.h"
 #include "system/common.h"
+#include "system/cmdline.h"
 
 #include "mysql/DBPool.h"
 #include "mysql/DBConn.h"
@@ -31,7 +33,7 @@
 
 namespace opt = boost::program_options;
 namespace bfs = boost::filesystem;
-namespace bpt = boost::property_tree;
+
 
 
 
@@ -42,9 +44,6 @@ int set_env(){
     return 0;
 }
 
-void write_log_to_file(std::string info) {
-    App::GetInstance().g_logfile.get()->append(info.c_str(), info.length());
-}
 
 
 int create_config_file(std::string cfg) {
@@ -88,60 +87,7 @@ int create_config_file(std::string cfg) {
     return 0;
 }
 
-int read_config_file(std::string& cfg, stXmlCfg& xmlCfg) {
-
-    bpt::ptree root;
-    try{
-        
-        bpt::read_xml(cfg, root);
-
-    }catch(std::exception& e){
-        std::cout << e.what() << std::endl;
-        std::string err = std::string("read_config_file() ") + e.what() + "\n"; 
-        write_log_to_file(err);
-
-        return -1;
-    }
-
-    std::string version = root.get<std::string>("Nethings.version");
-
-    bpt::ptree sqlInfo = root.get_child("Nethings.mysql");
-
-    std::string strKey;
- 
-    for(auto& v : sqlInfo) {
-        strKey = v.first;
-        if (strKey == std::string("ip")) {
-            xmlCfg.mysqlConnInfo.dbServerIp = v.second.data();
-        }
-        else if(strKey == std::string("port")) {
-            xmlCfg.mysqlConnInfo.dbPort = v.second.data();
-        }
-         else if(strKey == std::string("user")) {
-            xmlCfg.mysqlConnInfo.dbName = v.second.data();
-        }
-         else if(strKey == std::string("dbName")) {
-            xmlCfg.mysqlConnInfo.dbUser = v.second.data();
-        }
-         else if(strKey == std::string("password")) {
-            xmlCfg.mysqlConnInfo.dbPassword = v.second.data();
-        }
-        else {
-            std::string info = std::string("read_config_file()  unknown mysql config") + "\n"; 
-            write_log_to_file(info);
-        }
-
-        std::cout << v.first << ":" << v.second.data() << std::endl;
-
-    }
-
-    
-
-
-
-    return 0;
-}
-
+#if 0
 int init_config_file(const std::string& cfg){
     try{
         App& app = App::GetInstance();
@@ -173,7 +119,7 @@ int init_config_file(const std::string& cfg){
     }
     return 0;
 }
-
+#endif
 void test_mysql(){
 
     
@@ -241,21 +187,29 @@ int main(int argc, char** argv)
         return 0;
     }
 
+    //std::map<std::string, boost::any>  cmd;
+
     //default path of confile file
     std::string cfg_default = App::GetInstance().g_workpath + "/" + name_config_file;
 
-    if (vm.count("configfile")|| vm.count("c")) {
-     
-        std::string cfg_uesr = vm["configfile"].as<std::string>();
+    std::string key;
+    Cmdline cmd;
+    cmd.init();
 
+    if (vm.count("configfile")|| vm.count("c")) {
+        
+        key = std::string("configfile");
+        std::string cfg_user = vm[key].as<std::string>();
         char cfg_buf[PATH_MAX];
         memset(cfg_buf, 0, sizeof(cfg_buf));
-        realpath(cfg_uesr.c_str(), cfg_buf);
-        
-        std::string cfg_user = std::string(cfg_buf);
-        
-        std::cout << cfg_user<< std::endl;
+        realpath(cfg_user.c_str(), cfg_buf);
         cfg_user = cfg_user + "/" + name_config_file;
+        
+        cmd.addData(key, cfg_user);
+
+        //std::cout <<  boost::any_cast<std::string&>(cmd["configfile"]) << std::endl;
+
+    #if 0
 
 
         if(cfg_user != cfg_default) {
@@ -270,17 +224,26 @@ int main(int argc, char** argv)
             }
         }
 
+    #endif
+
     } 
     else {
-        
+ 
+        #if 0
         if(init_config_file(cfg_default))
         {
             return -5;
         }    
+        #endif
     }
+
+    cmd.parCmdline();
+    cmd.initDefaultCmd();
+   
 
     test_mysql();
     test_redis();
+    
  #if 1
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);

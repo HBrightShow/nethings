@@ -6,7 +6,7 @@
 
 
 
-App &App::GetInstance()
+App &App::getInstance()
 {
     // 局部静态特性的方式实现单实例
     static App signal;
@@ -41,6 +41,8 @@ bool App::setLogInfo(){
     g_logfile = std::unique_ptr<muduo::LogFile>(new muduo::LogFile(g_workpath + "/" + name_log_file, max_logfile_size_rollback,true ));
 }
 
-bool App::getXmlConfig() {
-    
+void App::write_log_to_file(std::string info) {
+    g_logfile.get()->append(info.c_str(), info.length());
 }
+
+

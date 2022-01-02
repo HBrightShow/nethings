@@ -1,6 +1,10 @@
 #ifndef _NETHING_COMMON_H_
 #define _NETHING_COMMON_H_
 
+#include<iostream>
+#include<map>
+#include<boost/any.hpp>
+
 #include "../mysql/Common.h"
 
 
@@ -25,12 +29,16 @@ typedef struct stXmlCfg{
 }stXmlCfg,*PstXmlCfg;
 
 
+class Common{
+    public:
+        Common();
+        ~Common();
 
 
 
-
-
-
+};
 
 
 #endif
+
+
