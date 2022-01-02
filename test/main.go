@@ -55,7 +55,7 @@ func (obj *spindleSpeed) Encode()([]byte, error) {
 
 
 func main() {
-	conn,err := net.Dial("tcp", "192.168.2.141:6666")
+	conn,err := net.Dial("tcp", "192.168.2.65:6666")
 	if err != nil{
 		fmt.Println("err: ", err)
 		return

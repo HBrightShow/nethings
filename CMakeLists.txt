@@ -37,7 +37,7 @@ set(IMPORTLIB
     -lboost_filesystem
     -lboost_program_options
     -lmysqlclient
-    -lpthread
+    -pthread
     #-lprotobuf
     -lmuduo_base
     -lmuduo_net
@@ -48,13 +48,13 @@ set(IMPORTLIB
 aux_source_directory(. DIR_MAIN_SRCS)
 
 #添加第三方头文件
-include_directories(./muduobuild/release-install-cpp11/include) 
-
+include_directories(./muduo/include) 
+include_directories(/usr/include/mysql)
 add_subdirectory(system)
 add_subdirectory(mysql)
 
 #添加需要链接的库文件目录,参数是全路径
-link_directories(~/xiaozhong/code/nethings/muduobuild/release-install-cpp11/lib  /usr/lib /lib/x86_64-linux-gnu)
+link_directories(~/nethings/muduo/lib  /usr/lib /lib/x86_64-linux-gnu)
 
 # 指定生成目标
 add_executable(nethings ${DIR_MAIN_SRCS} )
