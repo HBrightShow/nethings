@@ -38,10 +38,19 @@ bool App::setLogInfo(){
     getcwd(buf, PATH_MAX);
     g_workpath = std::string(buf);
 
+
+    //std::cout << "g_workpath: " << g_workpath << std::endl;
+    //std::cout << " name_log_file: " << name_log_file << std::endl;
+
     g_logfile = std::unique_ptr<muduo::LogFile>(new muduo::LogFile(g_workpath + "/" + name_log_file, max_logfile_size_rollback,true ));
+
+    //std::cout << "setLogInfo  g_logfile" << g_logfile.get() << std::endl;
+
+    return true;
 }
 
 void App::write_log_to_file(std::string info) {
+    //std::cout << "write_log_to_file  g_logfile" << g_logfile.get() << std::endl;
     g_logfile.get()->append(info.c_str(), info.length());
 }
 

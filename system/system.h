@@ -6,12 +6,16 @@
 #include<boost/any.hpp>
 #include "../muduo/include/muduo/base/LogFile.h"
 
+
+        
+
 class App
 {
 
 public:
     // 获取单实例对象
     static App &getInstance();
+    int  init();
     void write_log_to_file(std::string info);
 
 public:
@@ -34,9 +38,9 @@ private:
     // 禁止外部赋值操作
     const App &operator=(const App &signal);
 
-    int  init();
+    
+    
     bool setLogInfo();
-  
     
     
 

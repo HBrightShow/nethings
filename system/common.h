@@ -23,9 +23,16 @@ enum  global_error_code{
 };
 
 
+namespace redisMode{
+typedef struct stRedisServerInfo{
+    std::string  serverIp;
+    std::string  port;
+}stRedisServerInfo,*PstRedisServerInfo;
+};
 
 typedef struct stXmlCfg{
     mysql::stMysqlConnInfo mysqlConnInfo;
+    redisMode::stRedisServerInfo redisInfo;
 }stXmlCfg,*PstXmlCfg;
 
 
