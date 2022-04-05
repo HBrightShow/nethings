@@ -152,10 +152,10 @@ int main(int argc, char** argv)
     cmd.initDefaultCmd();
    
 
-    test_mysql();
-    test_redis();
+    //test_mysql();
+    //test_redis();
     
- #if 0
+ #if 1
 
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);

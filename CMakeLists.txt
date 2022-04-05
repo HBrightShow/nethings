@@ -37,10 +37,9 @@ set(IMPORTLIB
     -lboost_filesystem
     -lboost_program_options
     -lmysqlclient
-    -pthread
-    #-lprotobuf
-    -lmuduo_base
     -lmuduo_net
+    -lmuduo_base
+    -pthread
     -lhiredis
  )
 
@@ -53,12 +52,15 @@ include_directories(./muduo/include)
 include_directories(/usr/include/mysql)
 add_subdirectory(system)
 add_subdirectory(mysql)
+add_subdirectory(core)
+
 
 #添加需要链接的库文件目录,参数是全路径
-link_directories(~/nethings/muduo/lib  /usr/lib /lib/x86_64-linux-gnu)
+link_directories(/home/hml/nethings/muduo/lib  /usr/lib /usr/lib/x86_64-linux-gnu)
 
 # 指定生成目标
 add_executable(nethings ${DIR_MAIN_SRCS} )
 
 
-target_link_libraries(nethings system nethings_mysql ${IMPORTLIB}   )
+target_link_libraries(nethings core system nethings_mysql ${IMPORTLIB})
+
