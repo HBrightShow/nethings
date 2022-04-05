@@ -8,7 +8,7 @@ using namespace mysql;
 
 DBPool::DBPool()
 {
-
+	
 }
 
 DBPool::DBPool(const char* name, const char* ip, unsigned short port, const char* userName, const char*passwd, const char*dbName, int maxConn)
@@ -31,7 +31,7 @@ DBPool::DBPool(const char* name, const char* ip, unsigned short port, const char
 int DBPool::init()
 {
 	int i = 0;
-	for (i=0;i<1;i++)
+	for (i = 0; i < 1; i++)
 	{
 		DBConn *pDbConn = new DBConn(this);
 		if (NULL == pDbConn)

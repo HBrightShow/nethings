@@ -1,2 +1,0 @@
-/usr/bin/ar qc libnethings_mysql.a  CMakeFiles/nethings_mysql.dir/DBConn.cpp.o CMakeFiles/nethings_mysql.dir/DBPool.cpp.o CMakeFiles/nethings_mysql.dir/PrepareStatement.cpp.o CMakeFiles/nethings_mysql.dir/ResultSet.cpp.o CMakeFiles/nethings_mysql.dir/ThreadNotify.cpp.o
-/usr/bin/ranlib libnethings_mysql.a

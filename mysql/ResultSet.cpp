@@ -67,3 +67,28 @@ int ResultSet::getIndex(const char* key)
 	return -1;
 }
 
+void ResultSet::printMap() {
+
+	/*
+	for(auto &v : m_keyMap) {
+		//std::cout << v.first << " : " << v.second << std::endl;
+		std::string filed = v.first;
+		std::cout << "filed: " << filed << std::endl;
+		std::cout << getIndex(filed.c_str()) << std::endl;
+	}
+	*/
+
+	uint64_t filed_size = m_keyMap.size();
+	while(next()) {
+
+		/*
+		for(int i = 0; i < filed_size; ++i) {
+			std::cout << m_row[i] << std::endl;
+		}*/
+
+		
+		std::cout << getString("address") << std::endl;
+	}
+
+}
+

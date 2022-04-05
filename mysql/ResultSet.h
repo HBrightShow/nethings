@@ -18,6 +18,7 @@ public:
 	bool next();
 	int getInt(const char *key);
 	char *getString(const char* key);
+	void printMap();
 
 private:
 	int getIndex(const char* key);

@@ -38,7 +38,7 @@ func construct_spindleSpeed_msg() *spindleSpeed {
 	//sp.speed = mapset.NewSet(14,25,36,45,78)
 	var i uint16
 	for i=0;i< 100; i++ {
-		sp.speeds[i] = i
+		sp.speeds[i] = 'a'
 	}
 
 	return &sp
@@ -46,7 +46,7 @@ func construct_spindleSpeed_msg() *spindleSpeed {
 
 func (obj *spindleSpeed) Encode()([]byte, error) {
 	buf := new(bytes.Buffer)
-	if err := binary.Write(buf, binary.LittleEndian,obj); err != nil {
+	if err := binary.Write(buf, binary.LittleEndian, obj); err != nil {
 		return nil, err
 	}
 
@@ -69,31 +69,32 @@ func main() {
 		sp := construct_spindleSpeed_msg()
 	
 
-		fmt.Println("data, length: ", unsafe.Sizeof(sp))
+		fmt.Println("data length: ", unsafe.Sizeof(*sp))
 
 		fmt.Println("1+++++++++++++++")
 
-		data,err := sp.Encode();
+		data, err := sp.Encode();
 		if err != nil {
 			fmt.Println("2+++++++++++++++")
 			break;
 		}
 		fmt.Println("3+++++++++++++++")
-		len, err := conn.Write(data) // 发送数据
-		fmt.Println("write datalen: ", len)
+		send_len, err := conn.Write(data) // 发送数据
+		fmt.Println("send data length: ", send_len)
 
 		if err != nil {
 			return
 		}
 
 		buf := [512]byte{}
-		n, err := conn.Read(buf[:])
+		recv_len, err := conn.Read(buf[:])
+		fmt.Println("recv data length = ", recv_len)
 
 		if err != nil {
 			fmt.Println("recv failed, err:", err)
 			return
 		}
-		fmt.Println(string(buf[:n]))
+		fmt.Println("recv data: ", string(buf[:recv_len - 1 ]))
 
 		time.Sleep(time.Duration(60)*time.Second)
 

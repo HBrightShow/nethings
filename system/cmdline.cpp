@@ -25,7 +25,7 @@ void Cmdline::addData(const std::string& key, const boost::any& value) {
 
 
 bool Cmdline::parCmdline() {
-    std::cout << "parCmdline() +++++++ " << std::endl;
+    //std::cout << "parCmdline() +++++++ " << std::endl;
     
     std::map<std::string, boost::any>::iterator it;
     for(it = cmdByUsers.begin(); it != cmdByUsers.end(); ++it) {
@@ -37,26 +37,26 @@ bool Cmdline::parCmdline() {
         }
     }
 
-    std::cout << "parCmdline() ------- " << std::endl;
+    //std::cout << "parCmdline() ------- " << std::endl;
 
     return true;
 }
 
 bool Cmdline::loadConfigFile(const std::string& cfg_user) {
-    std::cout << "loadConfigFile() +++++++ " << std::endl;
+    //std::cout << "loadConfigFile() +++++++ " << std::endl;
     std::cout << "cfg_user:" << cfg_user << std::endl;
     if(!readConfigFile(cfg_user)) {
         return false;
     }
 
 
-    std::cout << "loadConfigFile() ------- " << std::endl;
+    //std::cout << "loadConfigFile() ------- " << std::endl;
     return true;
 }
 
 
 bool Cmdline::readConfigFile(const std::string& cfg) {
-    std::cout << "readConfigFile() +++++++ " << std::endl;
+    //std::cout << "readConfigFile() +++++++ " << std::endl;
 
     bpt::ptree root;
     try{
@@ -98,12 +98,12 @@ bool Cmdline::readConfigFile(const std::string& cfg) {
         return false;
     }
 
-    std::cout << "readConfigFile() ------- " << std::endl;
+    //std::cout << "readConfigFile() ------- " << std::endl;
     return true;
 }
 
 bool Cmdline::initDefaultCmd() {
-    std::cout << "initDefaultCmd() +++++++ " << std::endl;
+    //std::cout << "initDefaultCmd() +++++++ " << std::endl;
 
     CmdMap diffMap;
      diffMap = CompareMap(cmdByUsers, cmdDfault, diffMap);
@@ -124,15 +124,15 @@ bool Cmdline::initDefaultCmd() {
         ++it;
     }
 
-    std::cout << "initDefaultCmd() ------- " << std::endl;
+    //std::cout << "initDefaultCmd() ------- " << std::endl;
     return true;
 }
 
 const CmdMap& Cmdline::CompareMap(const CmdMap& mapSrc, const CmdMap& mapDst, CmdMap& diffMap)
 {
 
-    std::cout << "mapSrc size: " << mapSrc.size() << std::endl;
-    std::cout << "mapDst size: " << mapDst.size() << std::endl;
+    //std::cout << "mapSrc size: " << mapSrc.size() << std::endl;
+    //std::cout << "mapDst size: " << mapDst.size() << std::endl;
 	if (mapSrc.size() == 0)
 	{
 		return mapDst;
@@ -158,7 +158,7 @@ const CmdMap& Cmdline::CompareMap(const CmdMap& mapSrc, const CmdMap& mapDst, Cm
 
 bool Cmdline::initConfigFile(const std::string& cfg){
 
-    std::cout << "initConfigFile() +++++++ " << std::endl;
+    //std::cout << "initConfigFile() +++++++ " << std::endl;
     try{
         App& app = App::getInstance();
         
@@ -187,7 +187,7 @@ bool Cmdline::initConfigFile(const std::string& cfg){
         App::getInstance().write_log_to_file(err);
     }
 
-    std::cout << "initConfigFile() ------- " << std::endl;
+    //std::cout << "initConfigFile() ------- " << std::endl;
 
     return true;
 }
@@ -195,7 +195,7 @@ bool Cmdline::initConfigFile(const std::string& cfg){
 
 bool Cmdline::createConfigFile(std::string cfg) {
 
-     std::cout << "createConfigFile() +++++++ " << std::endl;
+     //std::cout << "createConfigFile() +++++++ " << std::endl;
     try {
     
         int fd = open(cfg.c_str(), O_CREAT | O_WRONLY, 0666);
@@ -243,6 +243,6 @@ bool Cmdline::createConfigFile(std::string cfg) {
     m_xmlCfg.redisInfo.serverIp = "192.168.2.65";
     m_xmlCfg.redisInfo.port = "6739";
 
-    std::cout << "createConfigFile() ------- " << std::endl;
+    //std::cout << "createConfigFile() ------- " << std::endl;
     return true;
 }

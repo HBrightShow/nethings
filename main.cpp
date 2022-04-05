@@ -20,6 +20,7 @@
 #include "mysql/DBConn.h"
 #include "mysql/TableOPerator.h"
 #include "mysql/Common.h"
+#include "mysql/ResultSet.h"
 
 // using namespace muduo;
 // using namespace muduo::net;
@@ -33,7 +34,43 @@ int set_env(){
 }
 
 void test_mysql(){
+    mysql::DBPool *pool = new mysql::DBPool("mypool", "192.168.2.65", 3306, "net", "123456", "shop", 2);
+	if (pool->init())
+	{
+		return;
+	} 
+    else {
+        std::cout << "mysql init success." << std::endl;
+    }
 
+    mysql::DBConn *conn = pool->getDBConn();
+	if (conn == NULL)
+    {
+        std::cout << "mysql connect failed." << std::endl;
+    }
+	
+    // query
+    std::string getAddress = "select * from address";
+    mysql::ResultSet* result = conn->executeQuery(getAddress.c_str());
+    //result->printMap();
+
+    while(result->next()) {
+        std::cout << result->getString("id") << std::endl;
+        std::cout << result->getString("uid") << std::endl;
+        std::cout << result->getString("phone") << std::endl;
+        std::cout << result->getString("name") << std::endl;
+        std::cout << result->getString("zipcode") << std::endl;
+        std::cout << result->getString("address") << std::endl;
+        std::cout << result->getString("default_address") << std::endl;
+        std::cout << result->getString("add_time") << std::endl;
+    }
+    delete result;
+    result = NULL;
+
+    //insert
+    std::string insertAddress = "INSERT INTO address (uid, phone, name, zipcode, address, default_address, add_time)VALUES(3, '18390987867', 'hml', '20000', '南昌社区',1, unix_timestamp(now()))";
+    conn->executeUpdate(insertAddress.c_str(), true);
+    
 }
 
 void test_redis() {
@@ -59,35 +96,6 @@ void test_redis() {
     return ;
 }
 
-
-int test(int argc, char** argv) {
-
-    opt::options_description opts("all options"); 
-
-    opt::variables_map vm;
-
-    opts.add_options()  
-    ("filename", opt::value<std::string>(), "the file name which want to be found")
-    ("help", "this is a program to find a specified file");
-
-    try{
-        opt::store(opt::parse_command_line(argc, argv, opts), vm);
-    }
-    catch(...){
-        std::cout << "输入的参数中存在未定义的选项！\n";
-        return 0;
-    }
-
-    if(vm.count("help") ){
-        std::cout << opts << std::endl;   
-    }
-    if(vm.count("filename") ){
-        std::cout << "find " << vm["filename"].as<std::string>() << std::endl;
-    }
-    if(vm.empty() ){
-        std::cout << "no options found \n";
-    }
-}
 
 int main(int argc, char** argv)
 {
@@ -140,10 +148,10 @@ int main(int argc, char** argv)
         cmd.addData(key, cfg_user);
     }
     if(vm.empty() ){
-        std::cout << "no options input" << std::endl;
+        //std::cout << "no options input" << std::endl;
     }
     
-    std::cout << "start par " << std::endl;
+    //std::cout << "start par " << std::endl;
 
     if(!cmd.parCmdline()) {
         std::cerr << "cmd input error!" << std::endl;
@@ -152,10 +160,10 @@ int main(int argc, char** argv)
     cmd.initDefaultCmd();
    
 
-    //test_mysql();
+    test_mysql();
     //test_redis();
     
- #if 1
+ #if 0
 
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);
