@@ -65,23 +65,22 @@ bool Cmdline::readConfigFile(const std::string& cfg) {
 
         std::string version = root.get<std::string>("Nethings.version");
         bpt::ptree sqlInfo = root.get_child("Nethings.mysql");
-
         for(auto& v : sqlInfo) {
             strKey = v.first;
             if (strKey == std::string("ip")) {
-                m_xmlCfg.mysqlConnInfo.dbServerIp = v.second.data();
+                m_xmlCfg.mysqlInfo.ip = v.second.data();
             }
             else if(strKey == std::string("port")) {
-                m_xmlCfg.mysqlConnInfo.dbPort = v.second.data();
+                m_xmlCfg.mysqlInfo.port = v.second.data();
             }
             else if(strKey == std::string("user")) {
-                m_xmlCfg.mysqlConnInfo.dbName = v.second.data();
+                m_xmlCfg.mysqlInfo.name = v.second.data();
             }
             else if(strKey == std::string("dbName")) {
-                m_xmlCfg.mysqlConnInfo.dbUser = v.second.data();
+                m_xmlCfg.mysqlInfo.user = v.second.data();
             }
             else if(strKey == std::string("password")) {
-                m_xmlCfg.mysqlConnInfo.dbPassword = v.second.data();
+                m_xmlCfg.mysqlInfo.pwd = v.second.data();
             }
             else {
                 std::string info = std::string("read_config_file()  unknown mysql config") + "\n"; 
@@ -91,6 +90,24 @@ bool Cmdline::readConfigFile(const std::string& cfg) {
             std::cout << v.first << ":" << v.second.data() << std::endl;
 
         }
+
+        bpt::ptree redisInfo = root.get_child("Nethings.redis");
+        for(auto& v : redisInfo) {
+            strKey = v.first;
+            if (strKey == std::string("ip")) {
+                m_xmlCfg.redisInfo.ip = v.second.data();
+            }
+            else if(strKey == std::string("port")) {
+                m_xmlCfg.redisInfo.port = v.second.data();
+            }
+            else {
+                
+            }
+
+            std::cout << v.first << ":" << v.second.data() << std::endl;
+
+        }
+
     }catch(std::exception& e){
         std::cout << e.what() << std::endl;
         std::string err = std::string("read_config_file() ") + e.what() + "\n"; 
@@ -234,13 +251,13 @@ bool Cmdline::createConfigFile(std::string cfg) {
     
 
 
-    m_xmlCfg.mysqlConnInfo.dbServerIp = "192.168.2.65";
-    m_xmlCfg.mysqlConnInfo.dbPort = "3306";
-    m_xmlCfg.mysqlConnInfo.dbName = "shop";
-    m_xmlCfg.mysqlConnInfo.dbUser = "net";
-    m_xmlCfg.mysqlConnInfo.dbPassword = "123456";
+    m_xmlCfg.mysqlInfo.ip = "192.168.2.65";
+    m_xmlCfg.mysqlInfo.port = "3306";
+    m_xmlCfg.mysqlInfo.name = "shop";
+    m_xmlCfg.mysqlInfo.user = "net";
+    m_xmlCfg.mysqlInfo.pwd = "123456";
 
-    m_xmlCfg.redisInfo.serverIp = "192.168.2.65";
+    m_xmlCfg.redisInfo.ip = "192.168.2.65";
     m_xmlCfg.redisInfo.port = "6739";
 
     //std::cout << "createConfigFile() ------- " << std::endl;

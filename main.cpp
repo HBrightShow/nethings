@@ -160,8 +160,8 @@ int main(int argc, char** argv)
     cmd.initDefaultCmd();
    
 
-    test_mysql();
-    //test_redis();
+    //test_mysql();
+    test_redis();
     
  #if 0
 

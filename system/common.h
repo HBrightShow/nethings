@@ -6,6 +6,7 @@
 #include<boost/any.hpp>
 
 #include "../mysql/Common.h"
+#include "../redis/Common.h"
 
 
 const uint32_t max_logfile_size_rollback = 1024*1024*20;
@@ -23,16 +24,10 @@ enum  global_error_code{
 };
 
 
-namespace redisMode{
-typedef struct stRedisServerInfo{
-    std::string  serverIp;
-    std::string  port;
-}stRedisServerInfo,*PstRedisServerInfo;
-};
 
 typedef struct stXmlCfg{
-    mysql::stMysqlConnInfo mysqlConnInfo;
-    redisMode::stRedisServerInfo redisInfo;
+    mysql::stMysqlInfo mysqlInfo;
+    redisMode::stRedisInfo redisInfo;
 }stXmlCfg,*PstXmlCfg;
 
 

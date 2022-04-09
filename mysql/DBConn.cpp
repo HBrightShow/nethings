@@ -73,7 +73,7 @@ bool DBConn::executeUpdate(const char*sql_query, bool care_affected_rows /*= tru
 		return false;
 	}
 
-	if (mysql_affected_rows(m_mysql) >0)
+	if (mysql_affected_rows(m_mysql) > 0)
 	{
 		return 0;
 	}

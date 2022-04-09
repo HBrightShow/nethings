@@ -10,12 +10,12 @@
 namespace mysql {
 
 
-struct stMysqlConnInfo{
-    std::string dbServerIp;
-    std::string dbPort;
-    std::string dbName;
-    std::string dbUser;
-    std::string dbPassword;
+struct stMysqlInfo{
+    std::string ip;
+    std::string port;
+    std::string name;
+    std::string user;
+    std::string pwd;
 };
 
 };
