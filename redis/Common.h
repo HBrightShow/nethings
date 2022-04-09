@@ -13,11 +13,13 @@ typedef struct stRedisInfo{
 
 };
 
-
-
-
-
-
-
+typedef enum en_redisResultType
+{
+    redis_reply_invalid = -1,
+    redis_reply_string,
+    redis_reply_integer,
+    redis_reply_array,
+    redis_reply_null
+}redisResultType;
 
 #endif

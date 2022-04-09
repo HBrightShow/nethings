@@ -21,6 +21,9 @@
 #include "mysql/TableOPerator.h"
 #include "mysql/Common.h"
 #include "mysql/ResultSet.h"
+#include "redis/RedisConnPool.h"
+#include "redis/RedisConn.h"
+#include<hiredis/hiredis.h>
 
 // using namespace muduo;
 // using namespace muduo::net;
@@ -96,6 +99,15 @@ void test_redis() {
     return ;
 }
 
+void test_redis_2() {
+
+    redisMode::CRedisConnPool::init("0.0.0.0",6379,"123456", 2, 6);
+    std::shared_ptr<redisMode::CRedisConn> con = redisMode::CRedisConnPool::Get();
+    redisMode::RedisResult res;
+    redisMode::RedisStatus status = con->ExecCmd("keys *",res);
+    redisMode::CRedisConnPool::Back(con);
+}
+
 
 int main(int argc, char** argv)
 {
@@ -161,9 +173,10 @@ int main(int argc, char** argv)
    
 
     //test_mysql();
-    test_redis();
+    //test_redis();
+    test_redis_2();
     
- #if 0
+ #if 1
 
   muduo::net::EventLoop loop;
   muduo::net::InetAddress listenAddr(6666);
@@ -171,9 +184,10 @@ int main(int argc, char** argv)
   server.start();
   loop.loop();
 
-  
-
 #endif
+
+
+
   return 0;
 }
 

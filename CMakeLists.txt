@@ -52,6 +52,7 @@ include_directories(./muduo/include)
 include_directories(/usr/include/mysql)
 add_subdirectory(system)
 add_subdirectory(mysql)
+add_subdirectory(redis)
 add_subdirectory(core)
 
 
@@ -62,5 +63,5 @@ link_directories(/home/hml/nethings/muduo/lib  /usr/lib /usr/lib/x86_64-linux-gn
 add_executable(nethings ${DIR_MAIN_SRCS} )
 
 
-target_link_libraries(nethings core system nethings_mysql ${IMPORTLIB})
+target_link_libraries(nethings core system nethings_mysql nethings_redis ${IMPORTLIB})
 
