@@ -174,7 +174,7 @@ int main(int argc, char** argv)
 
     //test_mysql();
     //test_redis();
-    test_redis_2();
+    //test_redis_2();
     
  #if 1
 

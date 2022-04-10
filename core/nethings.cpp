@@ -42,11 +42,11 @@ void NethingsServer::onMessage(const muduo::net::TcpConnectionPtr& conn,
   
   muduo::string msg(buf->retrieveAllAsString());
   LOG_INFO << conn->name() << "  " << time.toString() << "data size: " << msg.size() 
-              << " data content: " << msg;
+              << " data content: " << msg.c_str() ;
 
 
-    muduo::BlockingQueue<std::string>  msg_queue;
-    msg_queue.put(msg);
+  muduo::BlockingQueue<std::string>  msg_queue;
+  msg_queue.put(msg);
 
   conn->send(msg);
 }
